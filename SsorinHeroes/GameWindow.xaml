@@ -1,0 +1,215 @@
+﻿<Window WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        x:Class="SsorinHeroes.GameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SsorinHeroes"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="540" Width="960">
+    <Window.Resources>
+        <Style x:Key="MyFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Control}">
+                        <Grid Margin="3 2">
+                            <Rectangle x:Name="r1" StrokeThickness="1" Stroke="Black" StrokeDashArray="2 2"/>
+                            <Border x:Name="border" Width="{TemplateBinding ActualWidth}" Height="{TemplateBinding ActualHeight}"  CornerRadius="2" BorderThickness="1" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ShadowStyle">
+            <Setter Property="Control.Foreground" Value="Black" />
+        </Style>
+
+        <Style x:Key="EndTurnButton" TargetType="{x:Type Button}">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="FontSize" Value="11px"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource MyFocusVisual}" />
+            <Setter Property="Foreground" Value="MediumSpringGreen"/>
+            <Setter Property="Background" Value="DarkGreen"/>
+            <Setter Property="BorderBrush" Value="Lime"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" 
+                            BorderThickness="1"
+                            Padding="4,2" 
+                            BorderBrush="Lime" 
+                            CornerRadius="15" 
+                            Background="{TemplateBinding Background}">
+                            <Grid >
+                                <ContentPresenter HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center" x:Name="contentShadow" 
+                                    Style="{StaticResource ShadowStyle}">
+                                    <ContentPresenter.RenderTransform>
+                                        <TranslateTransform X="1.0" Y="1.0" />
+                                    </ContentPresenter.RenderTransform>
+                                </ContentPresenter>
+                                <ContentPresenter HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center" x:Name="content"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF008F00" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="SpringGreen" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="content" Property="RenderTransform" >
+                                    <Setter.Value>
+                                        <TranslateTransform Y="1.0" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Button.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="Border" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}">
+                            <ContentControl Margin="{TemplateBinding Padding}"
+                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                            Content="{TemplateBinding Content}"/>
+                        </Border>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ExitButton" TargetType="{x:Type Button}">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="FontSize" Value="11px"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource MyFocusVisual}" />
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" >
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" >
+                        <GradientStop Color="#FFFD2E2E" Offset="0.201"/>
+                        <GradientStop Color="Firebrick" Offset="0.85"/>
+                        <GradientStop Color="#FFFD2E2E" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" 
+                            BorderThickness="1"
+                            Padding="4,2" 
+                            BorderBrush="DarkGray" 
+                            CornerRadius="15" 
+                            Background="{TemplateBinding Background}">
+                            <Grid >
+                                <ContentPresenter HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center" x:Name="contentShadow" 
+                                    Style="{StaticResource ShadowStyle}">
+                                    <ContentPresenter.RenderTransform>
+                                        <TranslateTransform X="1.0" Y="1.0" />
+                                    </ContentPresenter.RenderTransform>
+                                </ContentPresenter>
+                                <ContentPresenter HorizontalAlignment="Center" 
+                                    VerticalAlignment="Center" x:Name="content"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" >
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" >
+                                            <GradientStop Color="Red" Offset="0.347"/>
+                                            <GradientStop Color="Firebrick" Offset="0.95"/>
+                                            <GradientStop Color="Red" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="border" Property="BorderBrush" Value="Red" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="content" Property="RenderTransform" >
+                                    <Setter.Value>
+                                        <TranslateTransform Y="1.0" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Window.Background>
+        <ImageBrush ImageSource="img/HeroesBG.jpg"/>
+    </Window.Background>
+    <Grid>
+        <Grid x:Name="MainGrid" HorizontalAlignment="Left" Height="512" Margin="88,10,0,0" VerticalAlignment="Top" Width="512" Background="#FFB9B9B9">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <Button Style="{StaticResource EndTurnButton}" Click="FinishTurn" x:Name="EndTurn" Content="Завершить ход" HorizontalAlignment="Left" VerticalAlignment="Top" Width="117" Height="51" Margin="605,10,0,0" FontFamily="Gabriola" FontWeight="Bold" FontSize="18"/>
+        <Label Foreground="Orange" x:Name="lb_leader" Content="Лидерство" HorizontalAlignment="Left" Margin="0,204,0,0" VerticalAlignment="Top" Background="Black" FontFamily="Gabriola" FontSize="14" Width="88"/>
+        <Label Foreground="Orange" x:Name="lb_ap" Content="Действия" HorizontalAlignment="Left" Margin="0,243,0,0" VerticalAlignment="Top" Background="Black" FontFamily="Gabriola" FontSize="16" Width="88"/>
+        <Label Foreground="Orange" x:Name="lb_hp" Content="Здоровье" HorizontalAlignment="Left" Margin="0,285,0,0" VerticalAlignment="Top" Background="Black" FontFamily="Gabriola" FontSize="16" Width="88"/>
+        <Label Foreground="Orange" x:Name="lb_attack" Content="Атака" HorizontalAlignment="Left" Margin="0,327,0,0" VerticalAlignment="Top" Background="Black" FontFamily="Gabriola" FontSize="16" Width="88"/>
+        <Label Foreground="Orange" x:Name="lb_defense" Content="Защита" HorizontalAlignment="Left" Margin="0,369,0,0" VerticalAlignment="Top" Background="Black" FontFamily="Gabriola" Width="88" FontSize="16"/>
+        <Label Foreground="Orange" x:Name="lb_move" Content="Перемещение" HorizontalAlignment="Left" Margin="0,411,0,0" VerticalAlignment="Top" Background="Black" FontFamily="Gabriola" Width="88" FontSize="14"/>
+        <Label Foreground="Orange" x:Name="lb_luck" Content="Удача" HorizontalAlignment="Left" Margin="0,450,0,0" VerticalAlignment="Top" Background="Black" FontFamily="Gabriola" Width="88" FontSize="16"/>
+        <Label Foreground="Orange" x:Name="lb_accuracy" Content="Точность" HorizontalAlignment="Left" Margin="0,492,0,0" VerticalAlignment="Top" Background="Black" FontFamily="Gabriola" Width="88" VerticalContentAlignment="Center" FontSize="16"/>
+        <Label Foreground="OrangeRed" x:Name="Turn" Content="Ход: 0" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Background="DarkSlateGray" FontFamily="Gabriola" FontSize="24" Width="73" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold"/>
+        <Label Foreground="HotPink" x:Name="lb_leader_wizard" Content="Лидерство" HorizontalAlignment="Left" Margin="605,198,0,0" VerticalAlignment="Top" Background="Black" FontFamily="Gabriola" FontSize="14" Width="88"/>
+        <Label Foreground="HotPink" x:Name="lb_ap_wizard" Content="Мана" HorizontalAlignment="Left" Margin="605,237,0,0" VerticalAlignment="Top" Background="Black" FontFamily="Gabriola" FontSize="16" Width="88"/>
+        <Label Foreground="HotPink" x:Name="lb_hp_wizard" Content="Здоровье" HorizontalAlignment="Left" Margin="605,279,0,0" VerticalAlignment="Top" Background="Black" FontFamily="Gabriola" FontSize="16" Width="88"/>
+        <Label Foreground="HotPink" x:Name="lb_attack_wizard" Content="Атака" HorizontalAlignment="Left" Margin="605,320,0,0" VerticalAlignment="Top" Background="Black" FontFamily="Gabriola" FontSize="16" Width="88"/>
+        <Label Foreground="HotPink" x:Name="lb_defense_wizard" Content="Защита" HorizontalAlignment="Left" Margin="605,362,0,0" VerticalAlignment="Top" Background="Black" FontFamily="Gabriola" FontSize="16" Width="88"/>
+        <Label Foreground="HotPink" x:Name="lb_move_wizard" Content="Перемещение" HorizontalAlignment="Left" Margin="605,404,0,0" VerticalAlignment="Top" Background="Black" FontFamily="Gabriola" FontSize="14" Width="88"/>
+        <Label Foreground="HotPink" x:Name="lb_accuracy_wizard" Content="Точность" HorizontalAlignment="Left" Margin="605,485,0,0" VerticalAlignment="Top" Background="Black" FontFamily="Gabriola" FontSize="16" Width="88"/>
+        <Label Foreground="HotPink" x:Name="lb_name_wizard" Content="Имя" HorizontalAlignment="Left" Margin="605,156,0,0" VerticalAlignment="Top" Background="Black" FontFamily="Gabriola" FontSize="16" Width="88"/>
+        <Label Foreground="HotPink" x:Name="lb_luck_wizard" Content="Удача" HorizontalAlignment="Left" Margin="605,443,0,0" VerticalAlignment="Top" Background="Black" FontFamily="Gabriola" FontSize="16" Width="88"/>
+        <Label Foreground="DeepSkyBlue" x:Name="damageSpell" Content="Имя" HorizontalAlignment="Left" Margin="746,204,0,0" VerticalAlignment="Top" Background="Indigo" FontFamily="Gabriola" FontSize="16" Width="88" FontWeight="Bold" VerticalContentAlignment="Center"/>
+        <Label Foreground="DeepSkyBlue" x:Name="manaSpell" Content="Имя" HorizontalAlignment="Left" Margin="746,246,0,0" VerticalAlignment="Top" Background="Indigo" FontFamily="Gabriola" FontSize="16" Width="88" FontWeight="Bold" VerticalContentAlignment="Center"/>
+        <Label Foreground="DeepSkyBlue" x:Name="errorSpell" Content="Имя" HorizontalAlignment="Left" Margin="746,288,0,0" VerticalAlignment="Top" Background="Indigo" FontFamily="Gabriola" FontSize="16" Width="88" FontWeight="Bold" VerticalContentAlignment="Center"/>
+        <Label Foreground="DeepSkyBlue" x:Name="distanceSpell" Content="Имя" HorizontalAlignment="Left" Margin="746,330,0,0" VerticalAlignment="Top" Background="Indigo" FontFamily="Gabriola" FontSize="16" Width="88" FontWeight="Bold" VerticalContentAlignment="Center"/>
+        <Label Foreground="DeepSkyBlue" x:Name="damageSpell_Copy" Content="Заклинание" HorizontalAlignment="Left" Margin="746,158,0,0" VerticalAlignment="Top" Background="#FF6B00B9" FontFamily="Gabriola" FontSize="18" Width="88" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Button Content="X" Style="{StaticResource ExitButton}" Click="btExiot" BorderThickness="0" HorizontalAlignment="Left" Margin="910,10,0,0" VerticalAlignment="Top" Width="32" Height="32" FontSize="18" FontFamily="Arial Black"/>
+
+    </Grid>
+</Window>
